@@ -10,55 +10,61 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     18517,        431]
-NotebookOptionsPosition[     17552,        406]
-NotebookOutlinePosition[     17899,        421]
-CellTagsIndexPosition[     17856,        418]
+NotebookDataLength[     26464,        619]
+NotebookOptionsPosition[     25109,        590]
+NotebookOutlinePosition[     25458,        605]
+CellTagsIndexPosition[     25415,        602]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
 
 Cell[CellGroupData[{
-Cell["Generative alg.", "Chapter",
- CellChangeTimes->{{3.7913170097480717`*^9, 
-  3.7913170554403734`*^9}},ExpressionUUID->"4e28a235-b040-46f4-92e2-\
-d6f93573a094"],
+Cell["Interface", "Chapter",
+ CellChangeTimes->{{3.7930354324885693`*^9, 3.7930354378202353`*^9}, {
+  3.7942454903391047`*^9, 3.794245497642296*^9}, {3.7942457718316975`*^9, 
+  3.794245773152158*^9}},ExpressionUUID->"4c08644e-9a47-43bd-9c23-\
+1826a07a1464"],
 
-Cell["\<\
-Generates imgCount images, downloads them to destDir, and adds them to the \
-SQL server\
-\>", "Text",
- CellChangeTimes->{{3.7943188526649284`*^9, 
-  3.7943189312441635`*^9}},ExpressionUUID->"f16c674d-f099-4509-8936-\
-bb795c4470df"],
+Cell[CellGroupData[{
 
-Cell[BoxData[
+Cell[BoxData[{
  RowBox[{
-  RowBox[{"addImages", "[", 
-   RowBox[{"x_", ",", "y_"}], "]"}], ":=", "\[IndentingNewLine]", 
-  RowBox[{"Module", "[", 
+  RowBox[{
+   RowBox[{"pcount", " ", "=", " ", "0"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"program", " ", "counter", " ", "for", " ", "filename"}], " ", 
+   "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Primary", " ", "image", " ", "generation", " ", "function"}], " ",
+    "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
    RowBox[{
-    RowBox[{"{", 
+    RowBox[{"addImages", "[", 
+     RowBox[{"x_", ",", "y_"}], "]"}], ":=", "\[IndentingNewLine]", 
+    RowBox[{"Module", "[", 
      RowBox[{
-      RowBox[{"imgCount", "=", "x"}], ",", 
-      RowBox[{"destDir", "=", "y"}]}], "}"}], ",", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"image", ":=", 
-      RowBox[{"ImageCompose", "[", "\[IndentingNewLine]", 
+      RowBox[{"{", 
        RowBox[{
-        RowBox[{"Rasterize", "[", 
+        RowBox[{"imgCount", "=", "x"}], ",", 
+        RowBox[{"destDir", "=", "y"}]}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"image", ":=", 
+        RowBox[{"ImageCompose", "[", "\[IndentingNewLine]", 
          RowBox[{
-          RowBox[{"Graphics", "[", 
-           RowBox[{"Join", "[", "\[IndentingNewLine]", 
-            RowBox[{
-             RowBox[{"Table", "[", 
+          RowBox[{"Rasterize", "[", 
+           RowBox[{
+            RowBox[{"Graphics", "[", 
+             RowBox[{"Join", "[", "\[IndentingNewLine]", 
               RowBox[{
-               RowBox[{"Style", "[", 
+               RowBox[{"Table", "[", 
                 RowBox[{
-                 RowBox[{"Polygon", "[", 
-                  RowBox[{"Table", "[", 
-                   RowBox[{
+                 RowBox[{"Style", "[", 
+                  RowBox[{
+                   RowBox[{"Polygon", "[", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
                     RowBox[{"{", 
                     RowBox[{
                     RowBox[{"RandomInteger", "[", 
@@ -66,254 +72,190 @@ Cell[BoxData[
                     RowBox[{"RandomInteger", "[", 
                     RowBox[{"yAxis", "/", "10"}], "]"}]}], "}"}], ",", 
                     RowBox[{"RandomInteger", "[", "10", "]"}]}], "]"}], "]"}],
-                  ",", "randomColor"}], "]"}], ",", "polyNum"}], "]"}], ",", 
-             "\[IndentingNewLine]", 
-             RowBox[{"Table", "[", 
-              RowBox[{
-               RowBox[{"Style", "[", 
+                    ",", "randomColor"}], "]"}], ",", "polyNum"}], "]"}], ",",
+                "\[IndentingNewLine]", 
+               RowBox[{"Table", "[", 
                 RowBox[{
-                 RowBox[{"Circle", "[", 
+                 RowBox[{"Style", "[", 
                   RowBox[{
-                   RowBox[{"{", 
+                   RowBox[{"Circle", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
                     RowBox[{
                     RowBox[{"RandomInteger", "[", 
                     RowBox[{"xAxis", "/", "10"}], "]"}], ",", 
                     RowBox[{"RandomInteger", "[", 
                     RowBox[{"yAxis", "/", "10"}], "]"}]}], "}"}], ",", 
-                   RowBox[{"RandomReal", "[", 
+                    RowBox[{"RandomReal", "[", 
                     RowBox[{"yAxis", "/", "50"}], "]"}]}], "]"}], ",", 
-                 "randomColor", ",", 
-                 RowBox[{"Thickness", "[", 
-                  RowBox[{"RandomReal", "[", 
-                   RowBox[{"{", 
+                   "randomColor", ",", 
+                   RowBox[{"Thickness", "[", 
+                    RowBox[{"RandomReal", "[", 
+                    RowBox[{"{", 
                     RowBox[{"0.025", ",", "0.15"}], "}"}], "]"}], "]"}]}], 
-                "]"}], ",", "circleNum"}], "]"}], ",", "\[IndentingNewLine]", 
-             RowBox[{"Table", "[", 
-              RowBox[{
-               RowBox[{"Style", "[", 
+                  "]"}], ",", "circleNum"}], "]"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"Table", "[", 
                 RowBox[{
-                 RowBox[{"Disk", "[", 
+                 RowBox[{"Style", "[", 
                   RowBox[{
-                   RowBox[{"{", 
+                   RowBox[{"Disk", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
                     RowBox[{
                     RowBox[{"RandomInteger", "[", 
                     RowBox[{"xAxis", "/", "10"}], "]"}], ",", 
                     RowBox[{"RandomInteger", "[", 
                     RowBox[{"yAxis", "/", "10"}], "]"}]}], "}"}], ",", 
-                   RowBox[{"RandomReal", "[", 
+                    RowBox[{"RandomReal", "[", 
                     RowBox[{"yAxis", "/", "50"}], "]"}], ",", 
-                   RowBox[{"RandomReal", "[", 
+                    RowBox[{"RandomReal", "[", 
                     RowBox[{
                     RowBox[{"2", " ", "\[Pi]"}], ",", "2"}], "]"}]}], "]"}], 
-                 ",", "randomColor"}], "]"}], ",", "diskNum"}], "]"}], ",", 
-             "\[IndentingNewLine]", 
-             RowBox[{"Table", "[", 
-              RowBox[{
-               RowBox[{"Style", "[", 
+                   ",", "randomColor"}], "]"}], ",", "diskNum"}], "]"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"Table", "[", 
                 RowBox[{
-                 RowBox[{"BezierCurve", "[", 
-                  RowBox[{"Table", "[", 
-                   RowBox[{
+                 RowBox[{"Style", "[", 
+                  RowBox[{
+                   RowBox[{"BezierCurve", "[", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
                     RowBox[{"{", 
                     RowBox[{
                     RowBox[{"RandomReal", "[", 
                     RowBox[{"xAxis", "/", "10"}], "]"}], ",", 
                     RowBox[{"RandomReal", "[", 
                     RowBox[{"yAxis", "/", "10"}], "]"}]}], "}"}], ",", "4"}], 
-                   "]"}], "]"}], ",", "randomColor", ",", 
-                 RowBox[{"Thickness", "[", 
-                  RowBox[{"RandomReal", "[", 
-                   RowBox[{"{", 
+                    "]"}], "]"}], ",", "randomColor", ",", 
+                   RowBox[{"Thickness", "[", 
+                    RowBox[{"RandomReal", "[", 
+                    RowBox[{"{", 
                     RowBox[{"0.015", ",", "0.025"}], "}"}], "]"}], "]"}]}], 
-                "]"}], ",", "curveNum"}], "]"}]}], "]"}], "]"}], ",", 
-          "\[IndentingNewLine]", 
-          RowBox[{"RasterSize", "\[Rule]", 
-           RowBox[{"{", 
-            RowBox[{"xAxis", ",", "yAxis"}], "}"}]}], ",", 
-          RowBox[{"Background", "\[Rule]", 
-           RowBox[{"Blend", "[", 
-            RowBox[{
-             RowBox[{"{", 
-              RowBox[{
-               RowBox[{"Darker", "[", 
-                RowBox[{
-                 RowBox[{"RandomColor", "[", "]"}], ",", "0.5"}], "]"}], ",", 
-               RowBox[{"Darker", "[", 
-                RowBox[{"Gray", ",", 
-                 RowBox[{"2", "/", "3"}]}], "]"}]}], "}"}], ",", "0.75"}], 
-            "]"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"Rasterize", "[", 
-           RowBox[{
-            RowBox[{"Style", "[", 
-             RowBox[{"imgID", ",", 
-              RowBox[{"RGBColor", "[", 
-               RowBox[{"0.5", ",", "0.5", ",", "0.5"}], "]"}]}], "]"}], ",", 
+                  "]"}], ",", "curveNum"}], "]"}]}], "]"}], "]"}], ",", 
+            "\[IndentingNewLine]", 
             RowBox[{"RasterSize", "\[Rule]", 
-             RowBox[{"xAxis", "/", "10"}]}], ",", 
-            RowBox[{"Background", "\[Rule]", "None"}]}], "]"}], ",", "0.5"}], 
-         "}"}], ",", 
-        RowBox[{"Scaled", "[", 
-         RowBox[{"{", 
-          RowBox[{".925", ",", ".0325"}], "}"}], "]"}]}], "]"}]}], ";", 
-     "\[IndentingNewLine]", 
-     RowBox[{"xAxis", ":=", "3840"}], ";", "\[IndentingNewLine]", 
-     RowBox[{"yAxis", ":=", "3840"}], ";", "\[IndentingNewLine]", 
-     RowBox[{"imgID", ":=", 
-      RowBox[{
-       RowBox[{"IntegerString", "[", 
-        RowBox[{"pcount", ",", "10", ",", "3"}], "]"}], "<>", 
-       RowBox[{"IntegerString", "[", 
-        RowBox[{"i", ",", "10", ",", "3"}], "]"}]}]}], ";", 
-     "\[IndentingNewLine]", 
-     RowBox[{"expFilename", ":=", 
-      RowBox[{"destDir", "<>", "imgID", "<>", "\"\<.png\>\""}]}], ";", 
-     "\[IndentingNewLine]", 
-     RowBox[{"randomColor", ":=", 
-      RowBox[{"Directive", "[", 
-       RowBox[{
-        RowBox[{"RandomColor", "[", "]"}], ",", 
-        RowBox[{"Opacity", "[", 
-         RowBox[{"1.5", 
-          RowBox[{"RandomReal", "[", "]"}]}], "]"}]}], "]"}]}], ";", 
-     "\[IndentingNewLine]", 
-     RowBox[{"For", "[", 
-      RowBox[{
-       RowBox[{"i", "=", "0"}], ",", 
-       RowBox[{"i", "<", "imgCount"}], ",", 
-       RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"polyNum", "=", 
-         RowBox[{
-          RowBox[{"RandomInteger", "[", "3", "]"}], "+", "1"}]}], ";", 
-        "\[IndentingNewLine]", 
-        RowBox[{"circleNum", " ", "=", 
-         RowBox[{
-          RowBox[{"RandomInteger", "[", "2", "]"}], "+", "1"}]}], ";", 
-        "\[IndentingNewLine]", 
-        RowBox[{"diskNum", "=", 
-         RowBox[{
-          RowBox[{"RandomInteger", "[", "2", "]"}], "+", "1"}]}], ";", 
-        "\[IndentingNewLine]", 
-        RowBox[{"curveNum", "=", 
-         RowBox[{
-          RowBox[{"RandomInteger", "[", "2", "]"}], "+", "1"}]}], ";", 
-        "\[IndentingNewLine]", 
-        RowBox[{"expImg", "=", "image"}], ";", "\[IndentingNewLine]", 
-        RowBox[{"SQLInsert", "[", 
-         RowBox[{
-         "serverConn", ",", "\"\<images\>\"", ",", "\[IndentingNewLine]", 
+             RowBox[{"{", 
+              RowBox[{"xAxis", ",", "yAxis"}], "}"}]}], ",", 
+            RowBox[{"Background", "\[Rule]", 
+             RowBox[{"Blend", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"Darker", "[", 
+                  RowBox[{
+                   RowBox[{"RandomColor", "[", "]"}], ",", "0.5"}], "]"}], 
+                 ",", 
+                 RowBox[{"Darker", "[", 
+                  RowBox[{"Gray", ",", 
+                   RowBox[{"2", "/", "3"}]}], "]"}]}], "}"}], ",", "0.75"}], 
+              "]"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
           RowBox[{"{", 
            RowBox[{
-           "\"\<image\>\"", ",", "\"\<imgID\>\"", ",", "\"\<polyNum\>\"", 
-            ",", "\"\<circleNum\>\"", ",", "\"\<diskNum\>\"", ",", 
-            "\"\<curveNum\>\""}], "}"}], ",", "\[IndentingNewLine]", 
-          RowBox[{"{", 
-           RowBox[{
-           "expImg", ",", "imgID", ",", "polyNum", ",", "circleNum", ",", 
-            "diskNum", ",", "curveNum"}], "}"}]}], "\[IndentingNewLine]", 
-         "]"}], ";", "\[IndentingNewLine]", 
-        RowBox[{"Export", "[", 
-         RowBox[{"expFilename", ",", "expImg"}], "]"}]}]}], "]"}]}]}], 
-   "\[IndentingNewLine]", "]"}]}]], "Input",
- PageWidth->Infinity,
- CellChangeTimes->{{3.7913170097480717`*^9, 3.7913170245613728`*^9}, {
-   3.7913171427096853`*^9, 3.791317163533817*^9}, {3.791317193971098*^9, 
-   3.7913172212602158`*^9}, {3.791317257203088*^9, 3.791317442270461*^9}, {
-   3.791317516323021*^9, 3.7913175936464767`*^9}, 3.792267341523601*^9, {
-   3.7922674202503614`*^9, 3.792267420969799*^9}, {3.792268646680481*^9, 
-   3.792268690051157*^9}, {3.792268754356597*^9, 3.792268885917266*^9}, 
-   3.792268926114601*^9, {3.792268961977433*^9, 3.792268962102404*^9}, {
-   3.7930356357156763`*^9, 3.7930356370913277`*^9}, {3.794242362146494*^9, 
-   3.794242363526537*^9}, {3.7942424048558273`*^9, 3.794242407866338*^9}, {
-   3.7942424692962923`*^9, 3.794242494889346*^9}, {3.7942426429955063`*^9, 
-   3.7942426444155416`*^9}, {3.794242690185712*^9, 3.7942427761761427`*^9}, {
-   3.7942429988045015`*^9, 3.7942430014550085`*^9}, {3.79424328921439*^9, 
-   3.794243374964164*^9}, {3.7942436166494393`*^9, 3.794243751500676*^9}},
- CellLabel->"In[14]:=",ExpressionUUID->"272244d4-5c5b-4636-b2d8-ba85514242f2"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Interface", "Chapter",
- CellChangeTimes->{{3.7930354324885693`*^9, 3.7930354378202353`*^9}, {
-  3.7942454903391047`*^9, 3.794245497642296*^9}, {3.7942457718316975`*^9, 
-  3.794245773152158*^9}},ExpressionUUID->"4c08644e-9a47-43bd-9c23-\
-1826a07a1464"],
-
-Cell["\<\
-Current version, not working, but not sure why, probably a misunderstanding \
-of the scope of CloudDeploy[]\
-\>", "Text",
- CellChangeTimes->{{3.7943189631537*^9, 3.794318993904213*^9}, {
-  3.794319149916444*^9, 
-  3.7943191729685984`*^9}},ExpressionUUID->"b3d4c98a-cf76-4410-9e46-\
-101633ede318"],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"CloudDeploy", "[", "\[IndentingNewLine]", 
-  RowBox[{
-   RowBox[{"AskFunction", "[", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"Ask", "[", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"\"\<imgCount\>\"", ",", " ", "\"\<number of images\>\""}], 
-        "}"}], "\[Rule]", "\"\<Number\>\""}], "]"}], ";", 
-     "\[IndentingNewLine]", 
-     RowBox[{"Ask", "[", 
-      RowBox[{
-       RowBox[{"{", 
+            RowBox[{"Rasterize", "[", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{"imgID", ",", 
+                RowBox[{"RGBColor", "[", 
+                 RowBox[{"0.5", ",", "0.5", ",", "0.5"}], "]"}]}], "]"}], ",", 
+              RowBox[{"RasterSize", "\[Rule]", 
+               RowBox[{"xAxis", "/", "10"}]}], ",", 
+              RowBox[{"Background", "\[Rule]", "None"}]}], "]"}], ",", 
+            "0.5"}], "}"}], ",", 
+          RowBox[{"Scaled", "[", 
+           RowBox[{"{", 
+            RowBox[{".925", ",", ".0325"}], "}"}], "]"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"xAxis", ":=", "3840"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"yAxis", ":=", "3840"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"imgID", ":=", 
         RowBox[{
-        "\"\<destDir\>\"", ",", " ", "\"\<image download directory\>\""}], 
-        "}"}], "\[Rule]", "\"\<String\>\""}], "]"}]}], "\[IndentingNewLine]", 
-    "]"}], ";", " ", 
-   RowBox[{"(*", " ", 
-    RowBox[{
-     RowBox[{
-     "prompts", " ", "user", " ", "for", " ", "the", " ", "number", " ", "of",
-       " ", "images", " ", "to", " ", "generate", " ", "and", " ", "their", 
-      " ", "preferred", " ", "download", " ", "directory"}], ",", " ", 
-     RowBox[{"after", " ", 
-      RowBox[{"it", "'"}], "s", " ", "functional"}], ",", " ", 
-     RowBox[{
-     "we", " ", "could", " ", "provide", " ", "an", " ", "option", " ", "to", 
-      " ", "download", " ", "after", " ", "image", " ", "generation", " ", 
-      "instead", " ", "of", " ", "during"}]}], " ", "*)"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
-   RowBox[{"(*", " ", 
-    RowBox[{
-    "Launches", " ", "SQL", " ", "server", " ", "and", " ", "creates", " ", 
-     "the", " ", "image", " ", "table"}], " ", "*)"}], "\[IndentingNewLine]", 
-   RowBox[{"Needs", "[", "\"\<DatabaseLink`\>\"", "]"}], ";", 
-   "\[IndentingNewLine]", 
-   RowBox[{"server", " ", "=", " ", 
-    RowBox[{"SQLServerLaunch", "[", 
-     RowBox[{"{", 
-      RowBox[{"\"\<imgDb\>\"", "\[Rule]", 
-       RowBox[{"FileNameJoin", "[", 
-        RowBox[{"{", 
-         RowBox[{"$TemporaryDirectory", ",", "\"\<HSQLServer\>\""}], "}"}], 
-        "]"}]}], "}"}], "]"}]}], ";", "\[IndentingNewLine]", 
-   RowBox[{"serverConn", " ", "=", " ", 
-    RowBox[{"OpenSQLConnection", "[", 
-     RowBox[{"JDBC", "[", 
-      RowBox[{"\"\<HSQL(Server)\>\"", ",", "\"\<localhost/imgDb\>\""}], "]"}],
-      "]"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"IntegerString", "[", 
+          RowBox[{"pcount", ",", "10", ",", "3"}], "]"}], "<>", 
+         RowBox[{"IntegerString", "[", 
+          RowBox[{"i", ",", "10", ",", "3"}], "]"}]}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"expFilename", ":=", 
+        RowBox[{"destDir", "<>", "imgID", "<>", "\"\<.png\>\""}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"randomColor", ":=", 
+        RowBox[{"Directive", "[", 
+         RowBox[{
+          RowBox[{"RandomColor", "[", "]"}], ",", 
+          RowBox[{"Opacity", "[", 
+           RowBox[{"1.5", 
+            RowBox[{"RandomReal", "[", "]"}]}], "]"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"i", "=", "0"}], ",", 
+         RowBox[{"i", "<", "imgCount"}], ",", 
+         RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"polyNum", "=", 
+           RowBox[{
+            RowBox[{"RandomInteger", "[", "3", "]"}], "+", "1"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"circleNum", " ", "=", 
+           RowBox[{
+            RowBox[{"RandomInteger", "[", "2", "]"}], "+", "1"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"diskNum", "=", 
+           RowBox[{
+            RowBox[{"RandomInteger", "[", "2", "]"}], "+", "1"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"curveNum", "=", 
+           RowBox[{
+            RowBox[{"RandomInteger", "[", "2", "]"}], "+", "1"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"expImg", "=", "image"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"SQLInsert", "[", 
+           RowBox[{
+           "serverConn", ",", "\"\<images\>\"", ",", "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<imgID\>\"", ",", "\"\<polyNum\>\"", ",", 
+              "\"\<circleNum\>\"", ",", "\"\<diskNum\>\"", ",", 
+              "\"\<curveNum\>\""}], "}"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{
+             "imgID", ",", "polyNum", ",", "circleNum", ",", "diskNum", ",", 
+              "curveNum"}], "}"}]}], "\[IndentingNewLine]", "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Export", "[", 
+           RowBox[{"expFilename", ",", "expImg"}], "]"}]}]}], "]"}]}]}], 
+     "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Launches", " ", "SQL", " ", "server", " ", "and", " ", "creates", " ", 
+    "the", " ", "image", " ", "table"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Needs", "[", "\"\<DatabaseLink`\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"server", " ", "=", " ", 
+   RowBox[{"SQLServerLaunch", "[", 
+    RowBox[{"{", 
+     RowBox[{"\"\<imgDb\>\"", "\[Rule]", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{"$TemporaryDirectory", ",", "\"\<HSQLServer\>\""}], "}"}], 
+       "]"}]}], "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"serverConn", " ", "=", " ", 
+   RowBox[{"OpenSQLConnection", "[", 
+    RowBox[{"JDBC", "[", 
+     RowBox[{"\"\<HSQL(Server)\>\"", ",", "\"\<localhost/imgDb\>\""}], "]"}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
    RowBox[{"SQLCreateTable", "[", 
     RowBox[{"serverConn", ",", "\[IndentingNewLine]", 
-     RowBox[{"SQLTable", "[", "\"\<images\>\"", "]"}], ",", 
+     RowBox[{"SQLTable", "[", "\"\<IMAGES\>\"", "]"}], ",", 
      "\[IndentingNewLine]", 
      RowBox[{"{", "\[IndentingNewLine]", 
       RowBox[{
-       RowBox[{"SQLColumn", "[", 
-        RowBox[{"\"\<image\>\"", ",", " ", 
-         RowBox[{
-         "\"\<DataTypeName\>\"", "\[Rule]", "\"\<LONGVARBINARY\>\""}]}], 
-        "]"}], ",", "\[IndentingNewLine]", 
        RowBox[{"SQLColumn", "[", 
         RowBox[{"\"\<imgID\>\"", ",", " ", 
          RowBox[{"\"\<DataTypeName\>\"", "\[Rule]", "\"\<VARCHAR(6)\>\""}]}], 
@@ -334,40 +276,174 @@ Cell[BoxData[
         RowBox[{"\"\<curveNum\>\"", ",", " ", 
          RowBox[{"\"\<DataTypeName\>\"", "\[Rule]", "\"\<INTEGER\>\""}]}], 
         "]"}]}], "\[IndentingNewLine]", "}"}]}], "\[IndentingNewLine]", "]"}],
-    ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
-   RowBox[{"addImages", "[", 
-    RowBox[{"imgCount", ",", "destDir"}], "]"}], ";", " ", 
-   RowBox[{"(*", " ", 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
     RowBox[{
-    "Calls", " ", "the", " ", "generative", " ", "function", " ", "defined", 
-     " ", "above"}], " ", "*)"}], "\[IndentingNewLine]", 
-   RowBox[{"AskDisplay", "[", 
-    RowBox[{"SQLSelect", "[", 
-     RowBox[{"serverConn", ",", "\"\<images\>\""}], "]"}], "]"}], ";", " ", 
-   RowBox[{"(*", " ", 
+    "prompts", " ", "user", " ", "for", " ", "the", " ", "number", " ", "of", 
+     " ", "images", " ", "to", " ", "generate", " ", "and", " ", "their", " ",
+      "preferred", " ", "download", " ", "directory"}], ",", " ", 
     RowBox[{
+    "then", " ", "calls", " ", "the", " ", "image", " ", "generation", " ", 
+     "function"}]}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"dir", "=", 
+    RowBox[{"Directory", "[", "]"}]}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "sets", " ", "default", " ", "directory", " ", "to", " ", "current", " ", 
+    "working", " ", "directory"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"imagePrompt", "[", "]"}], ":=", "\[IndentingNewLine]", 
+    RowBox[{"(", 
      RowBox[{
-     "Should", " ", "display", " ", "the", " ", "contents", " ", "of", " ", 
-      "the", " ", "images", " ", "table", " ", "and", " ", "provide", " ", 
-      "a", " ", "button", " ", "to", " ", 
-      RowBox[{"continue", ".", " ", 
-       RowBox[{"It", "'"}]}], "s", " ", "possible", " ", "this", " ", "also", 
-      " ", 
-      RowBox[{"doesn", "'"}], "t", " ", "work"}], ",", " ", 
-     RowBox[{"but", " ", 
-      RowBox[{"haven", "'"}], "t", " ", "been", " ", "able", " ", "to", " ", 
-      "test"}]}], " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
-   RowBox[{"(*", " ", 
+      RowBox[{"CreateWindow", "[", 
+       RowBox[{"DialogNotebook", "[", 
+        RowBox[{
+         RowBox[{"Grid", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"\"\<Number of images:\>\"", ",", " ", 
+              RowBox[{"InputField", "[", 
+               RowBox[{
+                RowBox[{"Dynamic", "[", "ic", "]"}], ",", "Number"}], "]"}]}],
+              "}"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{"\"\<Image download directory:\>\"", ",", 
+              RowBox[{"InputField", "[", 
+               RowBox[{
+                RowBox[{"Dynamic", "[", "dir", "]"}], ",", "String"}], 
+               "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"CancelButton", "[", "]"}], ",", 
+              RowBox[{"DefaultButton", "[", 
+               RowBox[{"DialogReturn", "[", 
+                RowBox[{
+                 RowBox[{"imgCount", "=", "ic"}], ";", " ", 
+                 RowBox[{"destDir", "=", "dir"}]}], "]"}], "]"}]}], "}"}]}], 
+           "}"}], "]"}], ",", 
+         RowBox[{"Modal", "->", "True"}]}], "]"}], "]"}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"addImages", "[", 
+       RowBox[{"imgCount", ",", "destDir"}], "]"}], ";", " ", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+       "Calls", " ", "the", " ", "generative", " ", "function", " ", 
+        "defined", " ", "above"}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"pcount", "++"}]}], ")"}]}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
     RowBox[{
-    "Remove", " ", "SQL", " ", "content", " ", "and", " ", "close", " ", 
-     "connection"}], " ", "*)"}], "\[IndentingNewLine]", 
-   RowBox[{"SQLDropTable", "[", 
-    RowBox[{"serverConn", ",", "\"\<images\>\""}], "]"}], ";", 
-   "\[IndentingNewLine]", 
-   RowBox[{"CloseSQLConnection", "[", "serverConn", "]"}], ";", 
-   "\[IndentingNewLine]", 
-   RowBox[{"SQLServerShutdown", "[", "server", "]"}], ";"}], 
-  "\[IndentingNewLine]", "]"}]], "Input",
+    "Function", " ", "for", " ", "deletion", " ", "of", " ", "image"}], ",", 
+    " ", 
+    RowBox[{"currently", " ", "no", " ", "error", " ", "detection"}]}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"deletePrompt", "[", "]"}], ":=", "\[IndentingNewLine]", 
+   RowBox[{"(", 
+    RowBox[{"CreateWindow", "[", 
+     RowBox[{"DialogNotebook", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"InputField", "[", 
+         RowBox[{
+          RowBox[{"Dynamic", "[", "id", "]"}], ",", "Number"}], "]"}], ",", 
+        RowBox[{"DefaultButton", "[", 
+         RowBox[{
+          RowBox[{"SQLDelete", "[", 
+           RowBox[{"serverConn", ",", "\"\<IMAGES\>\"", ",", 
+            RowBox[{
+             RowBox[{"SQLColumn", "[", "\"\<IMGID\>\"", "]"}], "\[Equal]", 
+             "id"}]}], "]"}], ";", 
+          RowBox[{"DialogReturn", "[", "]"}]}], "]"}]}], "}"}], "]"}], "]"}], 
+    ")"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"imagePrompt", "[", "]"}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Primary", " ", "display", " ", "window"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"CreateWindow", "[", 
+  RowBox[{"DialogNotebook", "[", 
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Display", " ", "IMAGES", " ", "table"}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Dynamic", "[", 
+      RowBox[{"Grid", "[", 
+       RowBox[{
+        RowBox[{"Join", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"SQLColumnNames", "[", 
+             RowBox[{"serverConn", ",", "\"\<IMAGES\>\""}], "]"}], "[", 
+            RowBox[{"[", 
+             RowBox[{"All", ",", "2"}], "]"}], "]"}], "}"}], ",", 
+          RowBox[{"SQLSelect", "[", 
+           RowBox[{"serverConn", ",", "\"\<images\>\""}], "]"}]}], "]"}], ",", 
+        RowBox[{"Frame", "\[Rule]", "All"}], ",", 
+        RowBox[{"Background", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"None", ",", 
+           RowBox[{"{", 
+            RowBox[{"LightGray", ",", "None"}], "}"}]}], "}"}]}], ",", 
+        RowBox[{"ItemSize", "\[Rule]", "Full"}]}], "]"}], "]"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Control", " ", "buttons"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Grid", "[", 
+      RowBox[{
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+          RowBox[{
+          "Cancel", " ", "button", " ", "drops", " ", "table", " ", "and", 
+           " ", "closes", " ", "SQL"}], ",", " ", 
+          RowBox[{
+          "could", " ", "probably", " ", "use", " ", "more", " ", "error", 
+           " ", "handling"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"CancelButton", "[", 
+           RowBox[{"\"\<Exit\>\"", ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"Length", "[", 
+                RowBox[{
+                 RowBox[{"SQLTables", "[", "serverConn", "]"}], 
+                 "\[LessEqual]", "0"}], "]"}], ",", 
+               RowBox[{"SQLDropTable", "[", 
+                RowBox[{"serverConn", ",", "\"\<images\>\""}], "]"}]}], "]"}],
+              ";", "\[IndentingNewLine]", 
+             RowBox[{"CloseSQLConnection", "[", "serverConn", "]"}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"SQLServerShutdown", "[", "server", "]"}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"DialogReturn", "[", "]"}]}]}], "\[IndentingNewLine]", 
+           "]"}], "}"}], ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{"Button", "[", 
+           RowBox[{"\"\<Add Images\>\"", ",", 
+            RowBox[{"imagePrompt", "[", "]"}]}], "]"}], "}"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{"Button", "[", 
+           RowBox[{"\"\<Delete Image\>\"", ",", 
+            RowBox[{"deletePrompt", "[", "]"}]}], "]"}], "}"}]}], 
+        "\[IndentingNewLine]", "}"}], ",", 
+       RowBox[{"ItemSize", "\[Rule]", "Full"}]}], "]"}]}], 
+    "\[IndentingNewLine]", "}"}], "]"}], "]"}]}], "Input",
  CellChangeTimes->{{3.7930354492119675`*^9, 3.79303548515126*^9}, {
    3.7930355382383137`*^9, 3.793035559251212*^9}, {3.79303564690473*^9, 
    3.7930356497329283`*^9}, {3.7930357765351534`*^9, 3.793035781504819*^9}, {
@@ -382,30 +458,138 @@ Cell[BoxData[
    3.7942457362120123`*^9}, {3.7942458323367925`*^9, 
    3.7942458495016327`*^9}, {3.7942459776819353`*^9, 3.794246110330267*^9}, {
    3.794318998295545*^9, 3.7943191455726233`*^9}, {3.794319187391591*^9, 
-   3.794319323747383*^9}},ExpressionUUID->"131b8804-3143-4ee7-a9dc-\
+   3.794319323747383*^9}, {3.7947523747075644`*^9, 3.7947523900071936`*^9}, {
+   3.7947524323902426`*^9, 3.794752468764237*^9}, {3.7947525176146708`*^9, 
+   3.7947525213043523`*^9}, {3.7947525577174263`*^9, 
+   3.7947526858425426`*^9}, {3.794752866230044*^9, 3.7947528702345233`*^9}, 
+   3.794752922160104*^9, {3.794753534165953*^9, 3.794753573853835*^9}, {
+   3.7947536066707325`*^9, 3.7947536322485423`*^9}, {3.7947538341044483`*^9, 
+   3.7947539440584946`*^9}, {3.794755729294019*^9, 3.7947560166500573`*^9}, {
+   3.794756102675643*^9, 3.7947561909937134`*^9}, {3.794756316652281*^9, 
+   3.79475632395547*^9}, {3.794756844381996*^9, 3.7947568945932035`*^9}, {
+   3.7947583630926065`*^9, 3.7947583705222745`*^9}, {3.794761576980242*^9, 
+   3.794761716851985*^9}, {3.79476175492509*^9, 3.7947618281399093`*^9}, {
+   3.79476186114393*^9, 3.7947619385253153`*^9}, {3.7947619782177596`*^9, 
+   3.794762020801123*^9}, {3.7947620536361556`*^9, 3.7947620798462796`*^9}, {
+   3.7947621191575947`*^9, 3.7947622863337736`*^9}, {3.7947623256102023`*^9, 
+   3.7947623312303815`*^9}, 3.7947623753127728`*^9, {3.7947624490477266`*^9, 
+   3.794762502669778*^9}, {3.794762557335334*^9, 3.7947625743531537`*^9}, {
+   3.7947626208217735`*^9, 3.7947626447296877`*^9}, {3.794762863160376*^9, 
+   3.794762930195961*^9}, {3.794762996290743*^9, 3.7947630578576193`*^9}, {
+   3.79476310094228*^9, 3.7947631281075187`*^9}, {3.7947632074862328`*^9, 
+   3.7947632229688177`*^9}, {3.794763353318056*^9, 3.7947633601190896`*^9}, {
+   3.794763886994494*^9, 3.794763926904603*^9}, {3.794764169804409*^9, 
+   3.794764174023465*^9}, {3.7947643442072105`*^9, 3.7947643475096054`*^9}, {
+   3.7947646483463883`*^9, 3.794764840884535*^9}, {3.7947648813605704`*^9, 
+   3.7947649878118668`*^9}, {3.794765046914572*^9, 
+   3.794765047483409*^9}},ExpressionUUID->"131b8804-3143-4ee7-a9dc-\
 6a36e62c3ac7"],
 
 Cell[BoxData[
- InterpretationBox[
-  RowBox[{"CloudObject", "[", 
-   TemplateBox[{
-    "\"https://www.wolframcloud.com/obj/ced3d2da-806a-40de-8074-b918c0aa85d3\"\
-","https://www.wolframcloud.com/obj/ced3d2da-806a-40de-8074-b918c0aa85d3"},
-    "HyperlinkURL"], "]"}],
-  CloudObject[
-  "https://www.wolframcloud.com/obj/ced3d2da-806a-40de-8074-b918c0aa85d3"],
-  SelectWithContents->True]], "Output",
+ TemplateBox[{
+  "JDBC","error",
+   "\"\\!\\(\\*RowBox[{\\\"\\\\\\\"object name already exists: IMAGES in \
+statement [CREATE TABLE IMAGES (imgID VARCHAR(6) NOT NULL, polyNum INTEGER \
+NOT NULL, circleNum INTEGER NOT NULL, diskNum INTEGER NOT NULL, curveNum \
+INTEGER NOT NULL)]\\\\\\\"\\\"}]\\)\"",2,17,11,16497687726030078195,"Local",
+   "DatabaseLink`JDBC"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellChangeTimes->{{3.794764348580062*^9, 3.794764369249116*^9}},
+ CellLabel->
+  "During evaluation of \
+In[12]:=",ExpressionUUID->"d98db39b-47d5-4674-a092-bd6ba86f272b"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "StringForm","sfr",
+   "\"Item \\!\\(\\*RowBox[{\\\"1\\\"}]\\) requested in \\\"\\!\\(\\*RowBox[{\
+\\\"\\\\\\\"`1`\\\\\\\"\\\"}]\\)\\\" out of range; \
+\\!\\(\\*RowBox[{\\\"0\\\"}]\\) items available.\"",2,17,13,
+   16497687726030078195,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{{3.794764348580062*^9, 3.794764369264716*^9}},
+ CellLabel->
+  "During evaluation of \
+In[12]:=",ExpressionUUID->"72bdd7e9-1a65-4869-ab74-79ccb4eada60"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "JDBC","error","\"`1`\"",2,17,12,16497687726030078195,"Local",
+   "DatabaseLink`JDBC"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellChangeTimes->{{3.794764348580062*^9, 3.794764369296142*^9}},
+ CellLabel->
+  "During evaluation of \
+In[12]:=",ExpressionUUID->"d9e255bb-2431-4cf2-8722-25587266b843"],
+
+Cell[BoxData[
+ TemplateBox[{FrontEndObject[
+    LinkObject["dcfpu_shm", 3, 1]],24,
+   "FrontEndObject[LinkObject[\"dcfpu_shm\", 3, 1]]","24","24"},
+  "NotebookObjectUnsaved"]], "Output",
  CellChangeTimes->{
-  3.794244858236593*^9, 3.79424510244529*^9, 3.794245546732424*^9, 
-   3.7942455774620924`*^9, 3.7942456669122696`*^9, 3.794245742662182*^9, 
-   3.794245784582951*^9, {3.7942458370916147`*^9, 3.7942458526180205`*^9}, {
-   3.7942461157310715`*^9, 3.7942461178612576`*^9}},
- CellLabel->"Out[17]=",ExpressionUUID->"f275d3f6-650d-48d6-9f4a-3dc910e7e55b"]
+  3.7947623843002615`*^9, 3.794762579505413*^9, 3.7947626611599607`*^9, 
+   3.794762939489789*^9, 3.7947630128184757`*^9, 3.7947630701139994`*^9, 
+   3.794763140148215*^9, {3.794763240527839*^9, 3.7947632688076715`*^9}, 
+   3.7947633793039255`*^9, 3.7947636162981396`*^9, 3.794763953084242*^9, {
+   3.7947641928334804`*^9, 3.7947642181666155`*^9}, {3.7947643524714622`*^9, 
+   3.7947643780032377`*^9}},
+ CellLabel->"Out[22]=",ExpressionUUID->"4eebecc8-7812-403b-ac43-8ac388ea6c47"]
 }, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Manual SQL Controls", "Chapter",
+ CellChangeTimes->{{3.7947650578565354`*^9, 
+  3.7947650634615583`*^9}},ExpressionUUID->"59b6973f-ff5a-4390-a00c-\
+1cd75f19b8ff"],
+
+Cell["\<\
+Provides manual control over the SQL server used by the program in case of a \
+faulty server close\
+\>", "Text",
+ CellChangeTimes->{{3.7947650734412107`*^9, 
+  3.794765143631559*^9}},ExpressionUUID->"78dbff4c-36d3-4a3a-a6f4-\
+60deb15c40c6"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"server", " ", "=", " ", 
+   RowBox[{"SQLServerLaunch", "[", 
+    RowBox[{"{", 
+     RowBox[{"\"\<imgDb\>\"", "\[Rule]", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{"$TemporaryDirectory", ",", "\"\<HSQLServer\>\""}], "}"}], 
+       "]"}]}], "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"serverConn", " ", "=", " ", 
+  RowBox[{"OpenSQLConnection", "[", 
+   RowBox[{"JDBC", "[", 
+    RowBox[{"\"\<HSQL(Server)\>\"", ",", "\"\<localhost/imgDb\>\""}], "]"}], 
+   "]"}]}]}], "Input",
+ CellChangeTimes->{{3.7947636406764903`*^9, 3.7947636615641756`*^9}, 
+   3.794765109480776*^9},ExpressionUUID->"b6124c54-9f70-402e-b9f0-\
+1a2c7e62acd7"],
+
+Cell[BoxData[
+ RowBox[{"SQLDropTable", "[", 
+  RowBox[{"serverConn", ",", "\"\<images\>\""}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.7947626023707705`*^9, {3.7947650900260324`*^9, 
+   3.7947650971129637`*^9}},ExpressionUUID->"df37a92e-af61-4828-bf70-\
+4ba4d9ac26f6"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"CloseSQLConnection", "[", "serverConn", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"SQLServerShutdown", "[", "server", "]"}]}], "Input",ExpressionUUID->\
+"0cd65670-4b0a-40b1-95fe-0482082cf368"]
 }, Open  ]]
 },
-WindowSize->{929, 1021},
-WindowMargins->{{-8, Automatic}, {Automatic, 0}},
+WindowSize->{1858, 1037},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
 FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 8, 2019)",
 StyleDefinitions->"ReverseColor.nb"
 ]
@@ -421,17 +605,21 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 164, 3, 67, "Chapter",ExpressionUUID->"4e28a235-b040-46f4-92e2-d6f93573a094"],
-Cell[747, 27, 241, 6, 31, "Text",ExpressionUUID->"f16c674d-f099-4509-8936-bb795c4470df"],
-Cell[991, 35, 8857, 198, 523, "Input",ExpressionUUID->"272244d4-5c5b-4636-b2d8-ba85514242f2"]
+Cell[580, 22, 257, 4, 67, "Chapter",ExpressionUUID->"4c08644e-9a47-43bd-9c23-1826a07a1464"],
+Cell[CellGroupData[{
+Cell[862, 30, 20433, 455, 1511, "Input",ExpressionUUID->"131b8804-3143-4ee7-a9dc-6a36e62c3ac7"],
+Cell[21298, 487, 588, 12, 23, "Message",ExpressionUUID->"d98db39b-47d5-4674-a092-bd6ba86f272b"],
+Cell[21889, 501, 489, 11, 21, "Message",ExpressionUUID->"72bdd7e9-1a65-4869-ab74-79ccb4eada60"],
+Cell[22381, 514, 331, 8, 21, "Message",ExpressionUUID->"d9e255bb-2431-4cf2-8722-25587266b843"],
+Cell[22715, 524, 688, 12, 51, "Output",ExpressionUUID->"4eebecc8-7812-403b-ac43-8ac388ea6c47"]
+}, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[9885, 238, 257, 4, 67, "Chapter",ExpressionUUID->"4c08644e-9a47-43bd-9c23-1826a07a1464"],
-Cell[10145, 244, 306, 7, 31, "Text",ExpressionUUID->"b3d4c98a-cf76-4410-9e46-101633ede318"],
-Cell[CellGroupData[{
-Cell[10476, 255, 6278, 130, 637, "Input",ExpressionUUID->"131b8804-3143-4ee7-a9dc-6a36e62c3ac7"],
-Cell[16757, 387, 767, 15, 35, "Output",ExpressionUUID->"f275d3f6-650d-48d6-9f4a-3dc910e7e55b"]
-}, Open  ]]
+Cell[23452, 542, 168, 3, 67, "Chapter",ExpressionUUID->"59b6973f-ff5a-4390-a00c-1cd75f19b8ff"],
+Cell[23623, 547, 250, 6, 31, "Text",ExpressionUUID->"78dbff4c-36d3-4a3a-a6f4-60deb15c40c6"],
+Cell[23876, 555, 707, 17, 48, "Input",ExpressionUUID->"b6124c54-9f70-402e-b9f0-1a2c7e62acd7"],
+Cell[24586, 574, 268, 6, 28, "Input",ExpressionUUID->"df37a92e-af61-4828-bf70-4ba4d9ac26f6"],
+Cell[24857, 582, 236, 5, 48, "Input",ExpressionUUID->"0cd65670-4b0a-40b1-95fe-0482082cf368"]
 }, Open  ]]
 }
 ]
