@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     26464,        619]
-NotebookOptionsPosition[     25109,        590]
-NotebookOutlinePosition[     25458,        605]
-CellTagsIndexPosition[     25415,        602]
+NotebookDataLength[     25100,        571]
+NotebookOptionsPosition[     24542,        552]
+NotebookOutlinePosition[     24889,        567]
+CellTagsIndexPosition[     24846,        564]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -234,49 +234,65 @@ Cell[BoxData[{
   RowBox[{"Needs", "[", "\"\<DatabaseLink`\>\"", "]"}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"server", " ", "=", " ", 
-   RowBox[{"SQLServerLaunch", "[", 
-    RowBox[{"{", 
-     RowBox[{"\"\<imgDb\>\"", "\[Rule]", 
-      RowBox[{"FileNameJoin", "[", 
-       RowBox[{"{", 
-        RowBox[{"$TemporaryDirectory", ",", "\"\<HSQLServer\>\""}], "}"}], 
-       "]"}]}], "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{"FreeQ", "[", 
+     RowBox[{
+      RowBox[{"SQLServers", "[", "]"}], ",", "server"}], "]"}], ",", 
+    RowBox[{"server", " ", "=", " ", 
+     RowBox[{"SQLServerLaunch", "[", 
+      RowBox[{"{", 
+       RowBox[{"\"\<imgDb\>\"", "\[Rule]", 
+        RowBox[{"FileNameJoin", "[", 
+         RowBox[{"{", 
+          RowBox[{"$TemporaryDirectory", ",", "\"\<HSQLServer\>\""}], "}"}], 
+         "]"}]}], "}"}], "]"}]}]}], "]"}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"serverConn", " ", "=", " ", 
-   RowBox[{"OpenSQLConnection", "[", 
-    RowBox[{"JDBC", "[", 
-     RowBox[{"\"\<HSQL(Server)\>\"", ",", "\"\<localhost/imgDb\>\""}], "]"}], 
-    "]"}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{"FreeQ", "[", 
+     RowBox[{
+      RowBox[{"SQLConnections", "[", "]"}], ",", "serverConn"}], "]"}], ",", 
+    RowBox[{"serverConn", " ", "=", " ", 
+     RowBox[{"OpenSQLConnection", "[", 
+      RowBox[{"JDBC", "[", 
+       RowBox[{"\"\<HSQL(Server)\>\"", ",", "\"\<localhost/imgDb\>\""}], 
+       "]"}], "]"}]}]}], "]"}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"SQLCreateTable", "[", 
-    RowBox[{"serverConn", ",", "\[IndentingNewLine]", 
-     RowBox[{"SQLTable", "[", "\"\<IMAGES\>\"", "]"}], ",", 
-     "\[IndentingNewLine]", 
-     RowBox[{"{", "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{"SQLColumn", "[", 
-        RowBox[{"\"\<imgID\>\"", ",", " ", 
-         RowBox[{"\"\<DataTypeName\>\"", "\[Rule]", "\"\<VARCHAR(6)\>\""}]}], 
-        "]"}], ",", "\[IndentingNewLine]", 
-       RowBox[{"SQLColumn", "[", 
-        RowBox[{"\"\<polyNum\>\"", ",", " ", 
-         RowBox[{"\"\<DataTypeName\>\"", "\[Rule]", "\"\<INTEGER\>\""}]}], 
-        "]"}], ",", "\[IndentingNewLine]", 
-       RowBox[{"SQLColumn", "[", 
-        RowBox[{"\"\<circleNum\>\"", ",", " ", 
-         RowBox[{"\"\<DataTypeName\>\"", "\[Rule]", "\"\<INTEGER\>\""}]}], 
-        "]"}], ",", "\[IndentingNewLine]", 
-       RowBox[{"SQLColumn", "[", 
-        RowBox[{"\"\<diskNum\>\"", ",", " ", 
-         RowBox[{"\"\<DataTypeName\>\"", "\[Rule]", "\"\<INTEGER\>\""}]}], 
-        "]"}], ",", "\[IndentingNewLine]", 
-       RowBox[{"SQLColumn", "[", 
-        RowBox[{"\"\<curveNum\>\"", ",", " ", 
-         RowBox[{"\"\<DataTypeName\>\"", "\[Rule]", "\"\<INTEGER\>\""}]}], 
-        "]"}]}], "\[IndentingNewLine]", "}"}]}], "\[IndentingNewLine]", "]"}],
-    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"SQLTables", "[", "serverConn", "]"}], "===", 
+      RowBox[{"{", "}"}]}], ",", 
+     RowBox[{"SQLCreateTable", "[", 
+      RowBox[{"serverConn", ",", "\[IndentingNewLine]", 
+       RowBox[{"SQLTable", "[", "\"\<IMAGES\>\"", "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"SQLColumn", "[", 
+          RowBox[{"\"\<imgID\>\"", ",", " ", 
+           RowBox[{
+           "\"\<DataTypeName\>\"", "\[Rule]", "\"\<VARCHAR(6)\>\""}]}], "]"}],
+          ",", "\[IndentingNewLine]", 
+         RowBox[{"SQLColumn", "[", 
+          RowBox[{"\"\<polyNum\>\"", ",", " ", 
+           RowBox[{"\"\<DataTypeName\>\"", "\[Rule]", "\"\<INTEGER\>\""}]}], 
+          "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"SQLColumn", "[", 
+          RowBox[{"\"\<circleNum\>\"", ",", " ", 
+           RowBox[{"\"\<DataTypeName\>\"", "\[Rule]", "\"\<INTEGER\>\""}]}], 
+          "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"SQLColumn", "[", 
+          RowBox[{"\"\<diskNum\>\"", ",", " ", 
+           RowBox[{"\"\<DataTypeName\>\"", "\[Rule]", "\"\<INTEGER\>\""}]}], 
+          "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"SQLColumn", "[", 
+          RowBox[{"\"\<curveNum\>\"", ",", " ", 
+           RowBox[{"\"\<DataTypeName\>\"", "\[Rule]", "\"\<INTEGER\>\""}]}], 
+          "]"}]}], "\[IndentingNewLine]", "}"}]}], "\[IndentingNewLine]", 
+      "]"}]}], "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
   RowBox[{"(*", " ", 
    RowBox[{
     RowBox[{
@@ -285,15 +301,15 @@ Cell[BoxData[{
       "preferred", " ", "download", " ", "directory"}], ",", " ", 
     RowBox[{
     "then", " ", "calls", " ", "the", " ", "image", " ", "generation", " ", 
-     "function"}]}], " ", "*)"}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"dir", "=", 
-    RowBox[{"Directory", "[", "]"}]}], ";"}], " ", 
+     "function"}]}], " ", "*)"}], "\[IndentingNewLine]", 
   RowBox[{"(*", " ", 
    RowBox[{
-   "sets", " ", "default", " ", "directory", " ", "to", " ", "current", " ", 
-    "working", " ", "directory"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+    RowBox[{"Only", " ", "works", " ", "the", " ", "first", " ", "time"}], 
+    ",", " ", 
+    RowBox[{"Needs", " ", "alternate", " ", "solution", " ", "for", " ", 
+     RowBox[{"InputField", "[", "]"}], " ", "because", " ", "it", " ", 
+     RowBox[{"doesn", "'"}], "t", " ", "work", " ", "with", " ", 
+     "Dynamic"}]}], " ", "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{
@@ -301,8 +317,13 @@ Cell[BoxData[{
     RowBox[{"(", 
      RowBox[{
       RowBox[{"CreateWindow", "[", 
-       RowBox[{"DialogNotebook", "[", 
+       RowBox[{"DialogInput", "[", 
         RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"ic", "=", "5"}], ",", 
+           RowBox[{"dir", "=", 
+            RowBox[{"Directory", "[", "]"}]}]}], "}"}], ",", 
          RowBox[{"Grid", "[", 
           RowBox[{"{", 
            RowBox[{
@@ -320,7 +341,17 @@ Cell[BoxData[{
                "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
             RowBox[{"{", 
              RowBox[{
-              RowBox[{"CancelButton", "[", "]"}], ",", 
+              RowBox[{"CancelButton", "[", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{"pcount", "\[Equal]", "0"}], ",", 
+                 RowBox[{
+                  RowBox[{"SQLDropTable", "[", 
+                   RowBox[{"serverConn", ",", "\"\<IMAGES\>\""}], "]"}], ";", 
+                  RowBox[{"CloseSQLConnection", "[", "serverConn", "]"}], ";",
+                   "\[IndentingNewLine]", 
+                  RowBox[{"SQLServerShutdown", "[", "server", "]"}], ";", 
+                  RowBox[{"Abort", "[", "]"}]}]}], "]"}], "]"}], ",", 
               RowBox[{"DefaultButton", "[", 
                RowBox[{"DialogReturn", "[", 
                 RowBox[{
@@ -343,27 +374,36 @@ Cell[BoxData[{
     "Function", " ", "for", " ", "deletion", " ", "of", " ", "image"}], ",", 
     " ", 
     RowBox[{"currently", " ", "no", " ", "error", " ", "detection"}]}], " ", 
-   "*)"}]}], "\[IndentingNewLine]", 
+   "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Also", " ", "needs", " ", 
+    RowBox[{"InputField", "[", "]"}], " ", "change", " ", "as", " ", 
+    "described", " ", "above"}], " ", "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"deletePrompt", "[", "]"}], ":=", "\[IndentingNewLine]", 
-   RowBox[{"(", 
-    RowBox[{"CreateWindow", "[", 
-     RowBox[{"DialogNotebook", "[", 
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{"InputField", "[", 
-         RowBox[{
-          RowBox[{"Dynamic", "[", "id", "]"}], ",", "Number"}], "]"}], ",", 
-        RowBox[{"DefaultButton", "[", 
-         RowBox[{
-          RowBox[{"SQLDelete", "[", 
-           RowBox[{"serverConn", ",", "\"\<IMAGES\>\"", ",", 
-            RowBox[{
-             RowBox[{"SQLColumn", "[", "\"\<IMGID\>\"", "]"}], "\[Equal]", 
-             "id"}]}], "]"}], ";", 
-          RowBox[{"DialogReturn", "[", "]"}]}], "]"}]}], "}"}], "]"}], "]"}], 
-    ")"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"deletePrompt", "[", "]"}], ":=", "\[IndentingNewLine]", 
+    RowBox[{"(", 
+     RowBox[{"CreateWindow", "[", 
+      RowBox[{"DialogNotebook", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"InputField", "[", 
+          RowBox[{
+           RowBox[{"Dynamic", "[", "id", "]"}], ",", "Number"}], "]"}], ",", 
+         RowBox[{"DefaultButton", "[", 
+          RowBox[{
+           RowBox[{"SQLDelete", "[", 
+            RowBox[{"serverConn", ",", "\"\<IMAGES\>\"", ",", 
+             RowBox[{
+              RowBox[{"SQLColumn", "[", "\"\<IMGID\>\"", "]"}], "\[Equal]", 
+              "id"}]}], "]"}], ";", 
+           RowBox[{"DialogReturn", "[", "]"}]}], "]"}]}], "}"}], "]"}], "]"}],
+      ")"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "initial", " ", "call", " ", "for", " ", "image", " ", "generation"}], " ",
+    "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"imagePrompt", "[", "]"}], ";"}], "\[IndentingNewLine]", 
@@ -410,22 +450,19 @@ Cell[BoxData[{
           "Cancel", " ", "button", " ", "drops", " ", "table", " ", "and", 
            " ", "closes", " ", "SQL"}], ",", " ", 
           RowBox[{
-          "could", " ", "probably", " ", "use", " ", "more", " ", "error", 
-           " ", "handling"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+          "Tried", " ", "to", " ", "introduce", " ", "error", " ", 
+           "handling"}], ",", " ", 
+          RowBox[{
+          "though", " ", "it", " ", "resulted", " ", "in", " ", "no", " ", 
+           "closing", " ", "actions"}]}], " ", "*)"}], "\[IndentingNewLine]", 
         RowBox[{
          RowBox[{"{", 
           RowBox[{"CancelButton", "[", 
            RowBox[{"\"\<Exit\>\"", ",", "\[IndentingNewLine]", 
             RowBox[{
-             RowBox[{"If", "[", 
-              RowBox[{
-               RowBox[{"Length", "[", 
-                RowBox[{
-                 RowBox[{"SQLTables", "[", "serverConn", "]"}], 
-                 "\[LessEqual]", "0"}], "]"}], ",", 
-               RowBox[{"SQLDropTable", "[", 
-                RowBox[{"serverConn", ",", "\"\<images\>\""}], "]"}]}], "]"}],
-              ";", "\[IndentingNewLine]", 
+             RowBox[{"SQLDropTable", "[", 
+              RowBox[{"serverConn", ",", "\"\<IMAGES\>\""}], "]"}], ";", 
+             "\[IndentingNewLine]", 
              RowBox[{"CloseSQLConnection", "[", "serverConn", "]"}], ";", 
              "\[IndentingNewLine]", 
              RowBox[{"SQLServerShutdown", "[", "server", "]"}], ";", 
@@ -481,115 +518,40 @@ Cell[BoxData[{
    3.794763886994494*^9, 3.794763926904603*^9}, {3.794764169804409*^9, 
    3.794764174023465*^9}, {3.7947643442072105`*^9, 3.7947643475096054`*^9}, {
    3.7947646483463883`*^9, 3.794764840884535*^9}, {3.7947648813605704`*^9, 
-   3.7947649878118668`*^9}, {3.794765046914572*^9, 
-   3.794765047483409*^9}},ExpressionUUID->"131b8804-3143-4ee7-a9dc-\
+   3.7947649878118668`*^9}, {3.794765046914572*^9, 3.794765047483409*^9}, {
+   3.7954645221417074`*^9, 3.7954645452571187`*^9}, {3.7954645977545824`*^9, 
+   3.795464638129122*^9}, {3.795464686740885*^9, 3.795464734409979*^9}, {
+   3.7954650509898634`*^9, 3.795465062905987*^9}, {3.795465151277482*^9, 
+   3.795465213488039*^9}, {3.7954652512619505`*^9, 3.7954652820326185`*^9}, 
+   3.795465365149207*^9, 3.795465417315791*^9, {3.7954661270165253`*^9, 
+   3.795466202569632*^9}, {3.7954663162853007`*^9, 3.7954663294002066`*^9}, {
+   3.7954663796846514`*^9, 3.795466407555096*^9}, {3.795466447799383*^9, 
+   3.7954664726629825`*^9}, {3.7954665159412003`*^9, 
+   3.7954665295058775`*^9}, {3.7954667617404776`*^9, 3.795466771985057*^9}, {
+   3.795466855809449*^9, 3.795466872869759*^9}, {3.7954669069774914`*^9, 
+   3.7954669385330825`*^9}, {3.795466999346319*^9, 3.7954670118428793`*^9}, {
+   3.795467531796669*^9, 3.7954675556920347`*^9}, {3.795467662639818*^9, 
+   3.7954676861499376`*^9}, {3.7954677304264245`*^9, 
+   3.7954677351467934`*^9}, {3.7954677912416906`*^9, 
+   3.7954679122568626`*^9}},ExpressionUUID->"131b8804-3143-4ee7-a9dc-\
 6a36e62c3ac7"],
 
 Cell[BoxData[
- TemplateBox[{
-  "JDBC","error",
-   "\"\\!\\(\\*RowBox[{\\\"\\\\\\\"object name already exists: IMAGES in \
-statement [CREATE TABLE IMAGES (imgID VARCHAR(6) NOT NULL, polyNum INTEGER \
-NOT NULL, circleNum INTEGER NOT NULL, diskNum INTEGER NOT NULL, curveNum \
-INTEGER NOT NULL)]\\\\\\\"\\\"}]\\)\"",2,17,11,16497687726030078195,"Local",
-   "DatabaseLink`JDBC"},
-  "MessageTemplate2"]], "Message", "MSG",
- CellChangeTimes->{{3.794764348580062*^9, 3.794764369249116*^9}},
- CellLabel->
-  "During evaluation of \
-In[12]:=",ExpressionUUID->"d98db39b-47d5-4674-a092-bd6ba86f272b"],
-
-Cell[BoxData[
- TemplateBox[{
-  "StringForm","sfr",
-   "\"Item \\!\\(\\*RowBox[{\\\"1\\\"}]\\) requested in \\\"\\!\\(\\*RowBox[{\
-\\\"\\\\\\\"`1`\\\\\\\"\\\"}]\\)\\\" out of range; \
-\\!\\(\\*RowBox[{\\\"0\\\"}]\\) items available.\"",2,17,13,
-   16497687726030078195,"Local"},
-  "MessageTemplate"]], "Message", "MSG",
- CellChangeTimes->{{3.794764348580062*^9, 3.794764369264716*^9}},
- CellLabel->
-  "During evaluation of \
-In[12]:=",ExpressionUUID->"72bdd7e9-1a65-4869-ab74-79ccb4eada60"],
-
-Cell[BoxData[
- TemplateBox[{
-  "JDBC","error","\"`1`\"",2,17,12,16497687726030078195,"Local",
-   "DatabaseLink`JDBC"},
-  "MessageTemplate2"]], "Message", "MSG",
- CellChangeTimes->{{3.794764348580062*^9, 3.794764369296142*^9}},
- CellLabel->
-  "During evaluation of \
-In[12]:=",ExpressionUUID->"d9e255bb-2431-4cf2-8722-25587266b843"],
-
-Cell[BoxData[
  TemplateBox[{FrontEndObject[
-    LinkObject["dcfpu_shm", 3, 1]],24,
-   "FrontEndObject[LinkObject[\"dcfpu_shm\", 3, 1]]","24","24"},
+    LinkObject["zqedt_shm", 3, 1]],73,
+   "FrontEndObject[LinkObject[\"zqedt_shm\", 3, 1]]","73","73"},
   "NotebookObjectUnsaved"]], "Output",
- CellChangeTimes->{
-  3.7947623843002615`*^9, 3.794762579505413*^9, 3.7947626611599607`*^9, 
-   3.794762939489789*^9, 3.7947630128184757`*^9, 3.7947630701139994`*^9, 
-   3.794763140148215*^9, {3.794763240527839*^9, 3.7947632688076715`*^9}, 
-   3.7947633793039255`*^9, 3.7947636162981396`*^9, 3.794763953084242*^9, {
-   3.7947641928334804`*^9, 3.7947642181666155`*^9}, {3.7947643524714622`*^9, 
-   3.7947643780032377`*^9}},
- CellLabel->"Out[22]=",ExpressionUUID->"4eebecc8-7812-403b-ac43-8ac388ea6c47"]
+ CellChangeTimes->{3.795465425204647*^9, 3.7954655830357714`*^9, 
+  3.7954658414054017`*^9, 3.7954662376527166`*^9, 3.795466371588316*^9, 
+  3.795466448473711*^9, 3.795466562001921*^9, 3.7954667985020695`*^9, 
+  3.7954669744230137`*^9, 3.7954672835508127`*^9},
+ CellLabel->
+  "Out[157]=",ExpressionUUID->"72f17266-6076-4992-b871-dd733cb216b2"]
 }, Open  ]]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Manual SQL Controls", "Chapter",
- CellChangeTimes->{{3.7947650578565354`*^9, 
-  3.7947650634615583`*^9}},ExpressionUUID->"59b6973f-ff5a-4390-a00c-\
-1cd75f19b8ff"],
-
-Cell["\<\
-Provides manual control over the SQL server used by the program in case of a \
-faulty server close\
-\>", "Text",
- CellChangeTimes->{{3.7947650734412107`*^9, 
-  3.794765143631559*^9}},ExpressionUUID->"78dbff4c-36d3-4a3a-a6f4-\
-60deb15c40c6"],
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"server", " ", "=", " ", 
-   RowBox[{"SQLServerLaunch", "[", 
-    RowBox[{"{", 
-     RowBox[{"\"\<imgDb\>\"", "\[Rule]", 
-      RowBox[{"FileNameJoin", "[", 
-       RowBox[{"{", 
-        RowBox[{"$TemporaryDirectory", ",", "\"\<HSQLServer\>\""}], "}"}], 
-       "]"}]}], "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{"serverConn", " ", "=", " ", 
-  RowBox[{"OpenSQLConnection", "[", 
-   RowBox[{"JDBC", "[", 
-    RowBox[{"\"\<HSQL(Server)\>\"", ",", "\"\<localhost/imgDb\>\""}], "]"}], 
-   "]"}]}]}], "Input",
- CellChangeTimes->{{3.7947636406764903`*^9, 3.7947636615641756`*^9}, 
-   3.794765109480776*^9},ExpressionUUID->"b6124c54-9f70-402e-b9f0-\
-1a2c7e62acd7"],
-
-Cell[BoxData[
- RowBox[{"SQLDropTable", "[", 
-  RowBox[{"serverConn", ",", "\"\<images\>\""}], "]"}]], "Input",
- CellChangeTimes->{
-  3.7947626023707705`*^9, {3.7947650900260324`*^9, 
-   3.7947650971129637`*^9}},ExpressionUUID->"df37a92e-af61-4828-bf70-\
-4ba4d9ac26f6"],
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"CloseSQLConnection", "[", "serverConn", "]"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{"SQLServerShutdown", "[", "server", "]"}]}], "Input",ExpressionUUID->\
-"0cd65670-4b0a-40b1-95fe-0482082cf368"]
 }, Open  ]]
 },
-WindowSize->{1858, 1037},
-WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+WindowSize->{927, 1028},
+WindowMargins->{{-7, Automatic}, {Automatic, 0}},
 FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 8, 2019)",
 StyleDefinitions->"ReverseColor.nb"
 ]
@@ -607,19 +569,9 @@ Notebook[{
 Cell[CellGroupData[{
 Cell[580, 22, 257, 4, 67, "Chapter",ExpressionUUID->"4c08644e-9a47-43bd-9c23-1826a07a1464"],
 Cell[CellGroupData[{
-Cell[862, 30, 20433, 455, 1511, "Input",ExpressionUUID->"131b8804-3143-4ee7-a9dc-6a36e62c3ac7"],
-Cell[21298, 487, 588, 12, 23, "Message",ExpressionUUID->"d98db39b-47d5-4674-a092-bd6ba86f272b"],
-Cell[21889, 501, 489, 11, 21, "Message",ExpressionUUID->"72bdd7e9-1a65-4869-ab74-79ccb4eada60"],
-Cell[22381, 514, 331, 8, 21, "Message",ExpressionUUID->"d9e255bb-2431-4cf2-8722-25587266b843"],
-Cell[22715, 524, 688, 12, 51, "Output",ExpressionUUID->"4eebecc8-7812-403b-ac43-8ac388ea6c47"]
+Cell[862, 30, 23119, 506, 1853, "Input",ExpressionUUID->"131b8804-3143-4ee7-a9dc-6a36e62c3ac7"],
+Cell[23984, 538, 530, 10, 51, "Output",ExpressionUUID->"72f17266-6076-4992-b871-dd733cb216b2"]
 }, Open  ]]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[23452, 542, 168, 3, 67, "Chapter",ExpressionUUID->"59b6973f-ff5a-4390-a00c-1cd75f19b8ff"],
-Cell[23623, 547, 250, 6, 31, "Text",ExpressionUUID->"78dbff4c-36d3-4a3a-a6f4-60deb15c40c6"],
-Cell[23876, 555, 707, 17, 48, "Input",ExpressionUUID->"b6124c54-9f70-402e-b9f0-1a2c7e62acd7"],
-Cell[24586, 574, 268, 6, 28, "Input",ExpressionUUID->"df37a92e-af61-4828-bf70-4ba4d9ac26f6"],
-Cell[24857, 582, 236, 5, 48, "Input",ExpressionUUID->"0cd65670-4b0a-40b1-95fe-0482082cf368"]
 }, Open  ]]
 }
 ]
