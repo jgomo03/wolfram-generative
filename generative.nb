@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     25100,        571]
-NotebookOptionsPosition[     24542,        552]
-NotebookOutlinePosition[     24889,        567]
-CellTagsIndexPosition[     24846,        564]
+NotebookDataLength[     27478,        603]
+NotebookOptionsPosition[     26920,        584]
+NotebookOutlinePosition[     27267,        599]
+CellTagsIndexPosition[     27224,        596]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -41,14 +41,11 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{
-    RowBox[{"addImages", "[", 
-     RowBox[{"x_", ",", "y_"}], "]"}], ":=", "\[IndentingNewLine]", 
+    RowBox[{"addImages", "[", "x_", "]"}], ":=", "\[IndentingNewLine]", 
     RowBox[{"Module", "[", 
      RowBox[{
       RowBox[{"{", 
-       RowBox[{
-        RowBox[{"imgCount", "=", "x"}], ",", 
-        RowBox[{"destDir", "=", "y"}]}], "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"imgCount", "=", "x"}], "}"}], ",", "\[IndentingNewLine]", 
       RowBox[{
        RowBox[{"image", ":=", 
         RowBox[{"ImageCompose", "[", "\[IndentingNewLine]", 
@@ -176,8 +173,8 @@ Cell[BoxData[{
           RowBox[{"i", ",", "10", ",", "3"}], "]"}]}]}], ";", 
        "\[IndentingNewLine]", 
        RowBox[{"expFilename", ":=", 
-        RowBox[{"destDir", "<>", "imgID", "<>", "\"\<.png\>\""}]}], ";", 
-       "\[IndentingNewLine]", 
+        RowBox[{"$UserBaseDirectory", "<>", "imgID", "<>", "\"\<.png\>\""}]}],
+        ";", "\[IndentingNewLine]", 
        RowBox[{"randomColor", ":=", 
         RowBox[{"Directive", "[", 
          RowBox[{
@@ -188,7 +185,7 @@ Cell[BoxData[{
        "\[IndentingNewLine]", 
        RowBox[{"For", "[", 
         RowBox[{
-         RowBox[{"i", "=", "0"}], ",", 
+         RowBox[{"i", "=", "1"}], ",", 
          RowBox[{"i", "<", "imgCount"}], ",", 
          RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
          RowBox[{
@@ -292,7 +289,13 @@ Cell[BoxData[{
           RowBox[{"\"\<curveNum\>\"", ",", " ", 
            RowBox[{"\"\<DataTypeName\>\"", "\[Rule]", "\"\<INTEGER\>\""}]}], 
           "]"}]}], "\[IndentingNewLine]", "}"}]}], "\[IndentingNewLine]", 
-      "]"}]}], "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      "]"}]}], "]"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"inputAssociation", "=", 
+    RowBox[{"<|", 
+     RowBox[{"ic", "\[Rule]", "3"}], "|>"}]}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
   RowBox[{"(*", " ", 
    RowBox[{
     RowBox[{
@@ -313,60 +316,51 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{
-    RowBox[{"imagePrompt", "[", "]"}], ":=", "\[IndentingNewLine]", 
+    RowBox[{"imagePrompt", "[", "]"}], ":=", 
     RowBox[{"(", 
      RowBox[{
       RowBox[{"CreateWindow", "[", 
        RowBox[{"DialogInput", "[", 
-        RowBox[{
+        RowBox[{"Grid", "[", 
          RowBox[{"{", 
           RowBox[{
-           RowBox[{"ic", "=", "5"}], ",", 
-           RowBox[{"dir", "=", 
-            RowBox[{"Directory", "[", "]"}]}]}], "}"}], ",", 
-         RowBox[{"Grid", "[", 
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"{", 
-             RowBox[{"\"\<Number of images:\>\"", ",", " ", 
-              RowBox[{"InputField", "[", 
+           RowBox[{"{", 
+            RowBox[{"\"\<Number of images:\>\"", ",", 
+             RowBox[{"InputField", "[", 
+              RowBox[{
+               RowBox[{"Dynamic", "[", "icIn", "]"}], ",", "Number"}], 
+              "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"CancelButton", "[", 
+              RowBox[{"If", "[", 
                RowBox[{
-                RowBox[{"Dynamic", "[", "ic", "]"}], ",", "Number"}], "]"}]}],
-              "}"}], ",", "\[IndentingNewLine]", 
-            RowBox[{"{", 
-             RowBox[{"\"\<Image download directory:\>\"", ",", 
-              RowBox[{"InputField", "[", 
-               RowBox[{
-                RowBox[{"Dynamic", "[", "dir", "]"}], ",", "String"}], 
-               "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
-            RowBox[{"{", 
-             RowBox[{
-              RowBox[{"CancelButton", "[", 
-               RowBox[{"If", "[", 
+                RowBox[{"pcount", "\[Equal]", "0"}], ",", 
                 RowBox[{
-                 RowBox[{"pcount", "\[Equal]", "0"}], ",", 
-                 RowBox[{
-                  RowBox[{"SQLDropTable", "[", 
-                   RowBox[{"serverConn", ",", "\"\<IMAGES\>\""}], "]"}], ";", 
-                  RowBox[{"CloseSQLConnection", "[", "serverConn", "]"}], ";",
-                   "\[IndentingNewLine]", 
-                  RowBox[{"SQLServerShutdown", "[", "server", "]"}], ";", 
-                  RowBox[{"Abort", "[", "]"}]}]}], "]"}], "]"}], ",", 
-              RowBox[{"DefaultButton", "[", 
+                 RowBox[{"SQLDropTable", "[", 
+                  RowBox[{"serverConn", ",", "\"\<IMAGES\>\""}], "]"}], ";", 
+                 RowBox[{"CloseSQLConnection", "[", "serverConn", "]"}], ";", 
+                 RowBox[{"SQLServerShutdown", "[", "server", "]"}], ";", 
+                 RowBox[{"Abort", "[", "]"}]}]}], "]"}], "]"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"DefaultButton", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"inputAssociation", "[", "ic", "]"}], "=", "icIn"}], 
+               ";", 
+               RowBox[{"icIn", "=."}], ";", 
                RowBox[{"DialogReturn", "[", 
-                RowBox[{
-                 RowBox[{"imgCount", "=", "ic"}], ";", " ", 
-                 RowBox[{"destDir", "=", "dir"}]}], "]"}], "]"}]}], "}"}]}], 
-           "}"}], "]"}], ",", 
-         RowBox[{"Modal", "->", "True"}]}], "]"}], "]"}], ";", 
+                RowBox[{"imgCount", "=", 
+                 RowBox[{"inputAssociation", "[", "ic", "]"}]}], "]"}]}], 
+              "]"}]}], "}"}]}], "}"}], "]"}], "]"}], "]"}], ";", 
       "\[IndentingNewLine]", "\[IndentingNewLine]", 
-      RowBox[{"addImages", "[", 
-       RowBox[{"imgCount", ",", "destDir"}], "]"}], ";", " ", 
+      RowBox[{"addImages", "[", "imgCount", "]"}], ";", " ", 
       RowBox[{"(*", " ", 
        RowBox[{
        "Calls", " ", "the", " ", "generative", " ", "function", " ", 
         "defined", " ", "above"}], " ", "*)"}], "\[IndentingNewLine]", 
-      RowBox[{"pcount", "++"}]}], ")"}]}], ";"}], "\[IndentingNewLine]", 
+      RowBox[{"pcount", "++"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"display", "[", "]"}]}], ")"}]}], ";"}], "\[IndentingNewLine]", 
   "\[IndentingNewLine]", 
   RowBox[{"(*", " ", 
    RowBox[{
@@ -401,86 +395,94 @@ Cell[BoxData[{
            RowBox[{"DialogReturn", "[", "]"}]}], "]"}]}], "}"}], "]"}], "]"}],
       ")"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
   RowBox[{"(*", " ", 
+   RowBox[{"Primary", " ", "display", " ", "window"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"display", "[", "]"}], ":=", "\[IndentingNewLine]", 
+    RowBox[{"(", 
+     RowBox[{"CreateWindow", "[", 
+      RowBox[{"DialogNotebook", "[", 
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{"Display", " ", "IMAGES", " ", "table"}], " ", "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"Dynamic", "[", 
+          RowBox[{"Grid", "[", 
+           RowBox[{
+            RowBox[{"Join", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"SQLColumnNames", "[", 
+                 RowBox[{"serverConn", ",", "\"\<IMAGES\>\""}], "]"}], "[", 
+                RowBox[{"[", 
+                 RowBox[{"All", ",", "2"}], "]"}], "]"}], "}"}], ",", 
+              RowBox[{"SQLSelect", "[", 
+               RowBox[{"serverConn", ",", "\"\<images\>\""}], "]"}]}], "]"}], 
+            ",", 
+            RowBox[{"Frame", "\[Rule]", "All"}], ",", 
+            RowBox[{"Background", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{"None", ",", 
+               RowBox[{"{", 
+                RowBox[{"LightGray", ",", "None"}], "}"}]}], "}"}]}], ",", 
+            RowBox[{"ItemSize", "\[Rule]", "Full"}]}], "]"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", " ", 
+          RowBox[{"Control", " ", "buttons"}], " ", "*)"}], 
+         "\[IndentingNewLine]", 
+         RowBox[{"Grid", "[", 
+          RowBox[{
+           RowBox[{"{", "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{
+              RowBox[{
+              "Cancel", " ", "button", " ", "drops", " ", "table", " ", "and",
+                " ", "closes", " ", "SQL"}], ",", " ", 
+              RowBox[{
+              "Tried", " ", "to", " ", "introduce", " ", "error", " ", 
+               "handling"}], ",", " ", 
+              RowBox[{
+              "though", " ", "it", " ", "resulted", " ", "in", " ", "no", " ",
+                "closing", " ", "actions"}]}], " ", "*)"}], 
+            "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"CancelButton", "[", 
+               RowBox[{"\"\<Exit\>\"", ",", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"SQLDropTable", "[", 
+                  RowBox[{"serverConn", ",", "\"\<IMAGES\>\""}], "]"}], ";", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"CloseSQLConnection", "[", "serverConn", "]"}], ";", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"SQLServerShutdown", "[", "server", "]"}], ";", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"DialogReturn", "[", "]"}]}]}], 
+               "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+              RowBox[{"Button", "[", 
+               RowBox[{"\"\<Add Images\>\"", ",", 
+                RowBox[{
+                 RowBox[{"DialogReturn", "[", "]"}], ";", 
+                 RowBox[{"imagePrompt", "[", "]"}]}]}], "]"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"Button", "[", 
+               RowBox[{"\"\<Delete Image\>\"", ",", 
+                RowBox[{
+                 RowBox[{"DialogReturn", "[", "]"}], ";", 
+                 RowBox[{"deletePrompt", "[", "]"}]}]}], "]"}]}], "}"}], 
+            "\[IndentingNewLine]", "}"}], ",", 
+           RowBox[{"ItemSize", "\[Rule]", "Full"}]}], "]"}]}], 
+        "\[IndentingNewLine]", "}"}], "]"}], "]"}], ")"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
    RowBox[{
    "initial", " ", "call", " ", "for", " ", "image", " ", "generation"}], " ",
     "*)"}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"imagePrompt", "[", "]"}], ";"}], "\[IndentingNewLine]", 
-  "\[IndentingNewLine]", 
-  RowBox[{"(*", " ", 
-   RowBox[{"Primary", " ", "display", " ", "window"}], " ", 
-   "*)"}]}], "\[IndentingNewLine]", 
- RowBox[{"CreateWindow", "[", 
-  RowBox[{"DialogNotebook", "[", 
-   RowBox[{"{", "\[IndentingNewLine]", 
-    RowBox[{"(*", " ", 
-     RowBox[{"Display", " ", "IMAGES", " ", "table"}], " ", "*)"}], 
-    "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"Dynamic", "[", 
-      RowBox[{"Grid", "[", 
-       RowBox[{
-        RowBox[{"Join", "[", 
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"SQLColumnNames", "[", 
-             RowBox[{"serverConn", ",", "\"\<IMAGES\>\""}], "]"}], "[", 
-            RowBox[{"[", 
-             RowBox[{"All", ",", "2"}], "]"}], "]"}], "}"}], ",", 
-          RowBox[{"SQLSelect", "[", 
-           RowBox[{"serverConn", ",", "\"\<images\>\""}], "]"}]}], "]"}], ",", 
-        RowBox[{"Frame", "\[Rule]", "All"}], ",", 
-        RowBox[{"Background", "\[Rule]", 
-         RowBox[{"{", 
-          RowBox[{"None", ",", 
-           RowBox[{"{", 
-            RowBox[{"LightGray", ",", "None"}], "}"}]}], "}"}]}], ",", 
-        RowBox[{"ItemSize", "\[Rule]", "Full"}]}], "]"}], "]"}], ",", 
-     "\[IndentingNewLine]", 
-     RowBox[{"(*", " ", 
-      RowBox[{"Control", " ", "buttons"}], " ", "*)"}], "\[IndentingNewLine]", 
-     RowBox[{"Grid", "[", 
-      RowBox[{
-       RowBox[{"{", "\[IndentingNewLine]", 
-        RowBox[{"(*", " ", 
-         RowBox[{
-          RowBox[{
-          "Cancel", " ", "button", " ", "drops", " ", "table", " ", "and", 
-           " ", "closes", " ", "SQL"}], ",", " ", 
-          RowBox[{
-          "Tried", " ", "to", " ", "introduce", " ", "error", " ", 
-           "handling"}], ",", " ", 
-          RowBox[{
-          "though", " ", "it", " ", "resulted", " ", "in", " ", "no", " ", 
-           "closing", " ", "actions"}]}], " ", "*)"}], "\[IndentingNewLine]", 
-        RowBox[{
-         RowBox[{"{", 
-          RowBox[{"CancelButton", "[", 
-           RowBox[{"\"\<Exit\>\"", ",", "\[IndentingNewLine]", 
-            RowBox[{
-             RowBox[{"SQLDropTable", "[", 
-              RowBox[{"serverConn", ",", "\"\<IMAGES\>\""}], "]"}], ";", 
-             "\[IndentingNewLine]", 
-             RowBox[{"CloseSQLConnection", "[", "serverConn", "]"}], ";", 
-             "\[IndentingNewLine]", 
-             RowBox[{"SQLServerShutdown", "[", "server", "]"}], ";", 
-             "\[IndentingNewLine]", 
-             RowBox[{"DialogReturn", "[", "]"}]}]}], "\[IndentingNewLine]", 
-           "]"}], "}"}], ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
-         RowBox[{"{", 
-          RowBox[{"Button", "[", 
-           RowBox[{"\"\<Add Images\>\"", ",", 
-            RowBox[{"imagePrompt", "[", "]"}]}], "]"}], "}"}], ",", 
-         "\[IndentingNewLine]", 
-         RowBox[{"{", 
-          RowBox[{"Button", "[", 
-           RowBox[{"\"\<Delete Image\>\"", ",", 
-            RowBox[{"deletePrompt", "[", "]"}]}], "]"}], "}"}]}], 
-        "\[IndentingNewLine]", "}"}], ",", 
-       RowBox[{"ItemSize", "\[Rule]", "Full"}]}], "]"}]}], 
-    "\[IndentingNewLine]", "}"}], "]"}], "]"}]}], "Input",
+ RowBox[{"imagePrompt", "[", "]"}]}], "Input",
  CellChangeTimes->{{3.7930354492119675`*^9, 3.79303548515126*^9}, {
    3.7930355382383137`*^9, 3.793035559251212*^9}, {3.79303564690473*^9, 
    3.7930356497329283`*^9}, {3.7930357765351534`*^9, 3.793035781504819*^9}, {
@@ -533,20 +535,50 @@ Cell[BoxData[{
    3.795467531796669*^9, 3.7954675556920347`*^9}, {3.795467662639818*^9, 
    3.7954676861499376`*^9}, {3.7954677304264245`*^9, 
    3.7954677351467934`*^9}, {3.7954677912416906`*^9, 
-   3.7954679122568626`*^9}},ExpressionUUID->"131b8804-3143-4ee7-a9dc-\
-6a36e62c3ac7"],
+   3.7954679122568626`*^9}, {3.7959116676455173`*^9, 
+   3.7959116808328695`*^9}, {3.7959117856640315`*^9, 3.795911797446121*^9}, {
+   3.796074365333901*^9, 3.796074373384388*^9}, {3.796074825517285*^9, 
+   3.7960748321426015`*^9}, {3.796075056599269*^9, 3.7960750620447035`*^9}, {
+   3.796075379798893*^9, 3.796075384139258*^9}, {3.7960754195784955`*^9, 
+   3.796075465011965*^9}, {3.7960756054443765`*^9, 3.79607560753678*^9}, {
+   3.7960756899802837`*^9, 3.7960757998973103`*^9}, {3.796075854529221*^9, 
+   3.7960758848989897`*^9}, {3.796076001851713*^9, 3.796076016248209*^9}, {
+   3.7960763246314745`*^9, 3.7960763500744247`*^9}, {3.7960764200891557`*^9, 
+   3.796076493555646*^9}, {3.796076541868433*^9, 3.796076587400657*^9}, {
+   3.7960766299229302`*^9, 3.796076752647732*^9}, {3.7960774715517387`*^9, 
+   3.796077478540081*^9}, {3.796077594490975*^9, 3.796077697821578*^9}, {
+   3.7960777393056297`*^9, 3.7960777668539495`*^9}, {3.796077849950709*^9, 
+   3.7960778533007464`*^9}, {3.7960779015686913`*^9, 3.796077909370817*^9}, 
+   3.796077958358816*^9, 3.796077991843259*^9, {3.796078063511586*^9, 
+   3.7960780693060865`*^9}, {3.796078121030856*^9, 3.79606145355602*^9}, {
+   3.796061495038044*^9, 3.7960615795184746`*^9}, {3.796061647722328*^9, 
+   3.7960616536351905`*^9}, {3.796061717588645*^9, 3.796061724419011*^9}, {
+   3.7960618421592045`*^9, 3.7960618769012036`*^9}, {3.7960619404063416`*^9, 
+   3.7960619456882143`*^9}, {3.7960622263505573`*^9, 
+   3.7960622286374416`*^9}, {3.7960623180223837`*^9, 3.796062320776016*^9}, {
+   3.796070491775053*^9, 3.7960704954601974`*^9}, 3.7960705451354113`*^9, {
+   3.7960707025843377`*^9, 3.7960708055013742`*^9}, {3.7960708502766314`*^9, 
+   3.796070911472975*^9}, {3.796071103299379*^9, 3.79607110842866*^9}, {
+   3.7960711621909018`*^9, 3.796071210649315*^9}, {3.796071270994933*^9, 
+   3.7960713420419064`*^9}, {3.7960714294032993`*^9, 
+   3.7960714573685174`*^9}, {3.7960714931378284`*^9, 
+   3.7960715770015755`*^9}, {3.7960716228539276`*^9, 3.796071829752925*^9}, {
+   3.796072050717222*^9, 3.796072073476991*^9}, {3.796072181424921*^9, 
+   3.7960722060986814`*^9}, {3.7960722380744686`*^9, 3.7960722829605703`*^9}},
+ CellLabel->
+  "In[124]:=",ExpressionUUID->"131b8804-3143-4ee7-a9dc-6a36e62c3ac7"],
 
 Cell[BoxData[
  TemplateBox[{FrontEndObject[
-    LinkObject["zqedt_shm", 3, 1]],73,
-   "FrontEndObject[LinkObject[\"zqedt_shm\", 3, 1]]","73","73"},
+    LinkObject["7kg38_shm", 3, 1]],72,
+   "FrontEndObject[LinkObject[\"7kg38_shm\", 3, 1]]","72","72"},
   "NotebookObjectUnsaved"]], "Output",
- CellChangeTimes->{3.795465425204647*^9, 3.7954655830357714`*^9, 
-  3.7954658414054017`*^9, 3.7954662376527166`*^9, 3.795466371588316*^9, 
-  3.795466448473711*^9, 3.795466562001921*^9, 3.7954667985020695`*^9, 
-  3.7954669744230137`*^9, 3.7954672835508127`*^9},
+ CellChangeTimes->{
+  3.7960780297029705`*^9, {3.796078097837861*^9, 3.7960616954610376`*^9}, 
+   3.7960619237608395`*^9, 3.7960619608037877`*^9, 3.796062335497644*^9, 
+   3.7960718595931234`*^9, 3.796072093630497*^9, 3.7960723080891476`*^9},
  CellLabel->
-  "Out[157]=",ExpressionUUID->"72f17266-6076-4992-b871-dd733cb216b2"]
+  "Out[134]=",ExpressionUUID->"d80e3ff8-dc24-4e8f-9fb0-18d1cd872e5f"]
 }, Open  ]]
 }, Open  ]]
 },
@@ -569,8 +601,8 @@ Notebook[{
 Cell[CellGroupData[{
 Cell[580, 22, 257, 4, 67, "Chapter",ExpressionUUID->"4c08644e-9a47-43bd-9c23-1826a07a1464"],
 Cell[CellGroupData[{
-Cell[862, 30, 23119, 506, 1853, "Input",ExpressionUUID->"131b8804-3143-4ee7-a9dc-6a36e62c3ac7"],
-Cell[23984, 538, 530, 10, 51, "Output",ExpressionUUID->"72f17266-6076-4992-b871-dd733cb216b2"]
+Cell[862, 30, 25515, 538, 1891, "Input",ExpressionUUID->"131b8804-3143-4ee7-a9dc-6a36e62c3ac7"],
+Cell[26380, 570, 512, 10, 51, "Output",ExpressionUUID->"d80e3ff8-dc24-4e8f-9fb0-18d1cd872e5f"]
 }, Open  ]]
 }, Open  ]]
 }
