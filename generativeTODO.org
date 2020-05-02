@@ -1,5 +1,0 @@
-* TODO Find alternative to InputField[] to work with Dynamic[]
-* TODO Add error checking to deletePrompt[]
-* TODO Rearrange buttons in primary display
-* TODO Make primary display size dynamically to reaccommodate table
-* TODO Ensure local file downloads
